@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Cyberpunk dark theme - Space blues and purples */
+    --background: 240 10% 8%;
+    --foreground: 210 100% 95%;
+
+    --card: 240 12% 12%;
+    --card-foreground: 210 100% 95%;
+    --card-glass: 240 15% 15% / 0.6;
+
+    --popover: 240 12% 10%;
+    --popover-foreground: 210 100% 95%;
+
+    /* Neon cyan as primary accent */
+    --primary: 188 100% 50%;
+    --primary-foreground: 240 10% 8%;
+    --primary-glow: 188 100% 60%;
+
+    /* Electric magenta as secondary */
+    --secondary: 320 100% 50%;
+    --secondary-foreground: 240 10% 8%;
+    --secondary-glow: 320 100% 60%;
+
+    --muted: 240 8% 20%;
+    --muted-foreground: 210 20% 65%;
+
+    --accent: 270 80% 55%;
+    --accent-foreground: 210 100% 95%;
+
+    --destructive: 0 80% 55%;
+    --destructive-foreground: 210 100% 95%;
+
+    --border: 240 12% 18%;
+    --input: 240 12% 15%;
+    --ring: 188 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar styling */
+    --sidebar-background: 240 12% 10%;
+    --sidebar-foreground: 210 100% 95%;
+    --sidebar-primary: 188 100% 50%;
+    --sidebar-primary-foreground: 240 10% 8%;
+    --sidebar-accent: 240 12% 15%;
+    --sidebar-accent-foreground: 188 100% 50%;
+    --sidebar-border: 240 12% 18%;
+    --sidebar-ring: 188 100% 50%;
+
+    /* Custom gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(188 100% 50%), hsl(320 100% 50%));
+    --gradient-cyber: linear-gradient(180deg, hsl(240 12% 12%), hsl(240 10% 8%));
+    --gradient-glow: radial-gradient(circle at center, hsl(188 100% 50% / 0.2), transparent 70%);
+
+    /* Glow effects */
+    --glow-cyan: 0 0 20px hsl(188 100% 50% / 0.5), 0 0 40px hsl(188 100% 50% / 0.3);
+    --glow-magenta: 0 0 20px hsl(320 100% 50% / 0.5), 0 0 40px hsl(320 100% 50% / 0.3);
+    --glow-subtle: 0 4px 20px hsl(188 100% 50% / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+
+  /* Glass effect utility */
+  .glass-card {
+    background: hsl(var(--card-glass));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* Neon glow animations */
+  @keyframes neon-pulse {
+    0%, 100% { 
+      box-shadow: var(--glow-cyan);
+    }
+    50% { 
+      box-shadow: 0 0 30px hsl(188 100% 50% / 0.7), 0 0 60px hsl(188 100% 50% / 0.4);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-neon-pulse {
+    animation: neon-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Safe area for mobile notches/home indicators */
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
